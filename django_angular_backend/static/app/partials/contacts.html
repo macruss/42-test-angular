@@ -1,0 +1,22 @@
+<h2>Contacts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Cell phone</th>
+      <th>Landline</th>
+      <th>Date of birth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="contact in vm.contacts">
+      <td  ng-bind="contact.first_name + ' ' + contact.last_name"></td>
+      <td ng-bind="contact.email"></td>
+      <td ng-bind="contact.cellphone_number"></td>
+      <td ng-bind="contact.phone_number"></td>
+      <td ng-bind="contact.birth_date"></td>
+    </tr>
+  </tbody>
+</table>

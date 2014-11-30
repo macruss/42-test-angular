@@ -43,3 +43,35 @@ class MyInfoTest(LiveServerTestCase):
 
             self.assertEquals(myInfo[i][0], name_field)
             self.assertEquals(myInfo[i][1], value)
+
+
+class ContactsTest(LiveServerTestCase):
+    fixtures = ['initial_data.json']
+
+    def setUp(self):
+        self.browser = webdriver.PhantomJS()
+        self.browser.implicitly_wait(3)
+
+    def tearDown(self):
+        self.browser.quit()
+
+
+    def test_angular_route(self):
+        self.browser.get(self.live_server_url)
+
+        self.assertEqual(self.browser.current_url.split('#')[1], "/main")
+
+        self.browser.find_element_by_link_text('Contacts').click()
+        self.assertEqual(self.browser.current_url.split('#')[1], "/contacts")
+
+        heading = self.browser.find_element_by_tag_name('h2')
+        self.assertEqual(heading.text, 'Contacts')
+
+
+    def test_view_contacts(self):
+        self.browser.get(self.live_server_url + '#/contacts')
+
+        contacts = self.browser.find_elements_by_css_selector('tbody tr')
+
+        self.assertEqual(len(contacts), 13)
+        self.assertIn("Leonard", contacts[2].text)
