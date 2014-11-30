@@ -1,0 +1,26 @@
+{
+  "name": "42-test-angular",
+  "version": "0.1.0",
+  "description": "Django Hello World Project",
+  "main": "karma.conf.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine-core": "^2.1.2",
+    "karma": "^0.12.23",
+    "karma-jasmine": "^0.3.2",
+    "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/macruss/42-test-angular.git"
+  },
+  "author": "Ruslan Makarenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macruss/42-test-angular/issues"
+  },
+  "homepage": "https://github.com/macruss/42-test-angular"
+}
