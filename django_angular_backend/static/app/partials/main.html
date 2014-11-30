@@ -1,0 +1,10 @@
+    <h2>My info</h2>
+
+    <table id="my-info">
+      <tbody>
+        <tr ng-repeat="field in vm.myInfo">
+          <td ng-bind="field.field_name"></td>
+          <td ng-bind="field.value"></td>
+        </tr>
+      </tbody>
+    </table>

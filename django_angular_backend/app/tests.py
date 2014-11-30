@@ -62,7 +62,7 @@ class ContactsTest(LiveServerTestCase):
         self.assertEqual(self.browser.current_url.split('#')[1], "/main")
 
         self.browser.find_element_by_link_text('Contacts').click()
-        self.assertEqual(self.browser.current_url.split('#')[1], "#/contacts")
+        self.assertEqual(self.browser.current_url.split('#')[1], "/contacts")
 
         heading = self.browser.find_element_by_tag_name('h2')
         self.assertEqual(heading.text, 'Contacts')
@@ -71,7 +71,7 @@ class ContactsTest(LiveServerTestCase):
     def test_view_contacts(self):
         self.browser.get(self.live_server_url + '#/contacts')
 
-        contacts = self.browser.find_elements_by_css_selector('a[ng-href]')
+        contacts = self.browser.find_elements_by_css_selector('tbody tr')
 
         self.assertEqual(len(contacts), 13)
-        self.assertIn("Leonard", contacts[4].text)
+        self.assertIn("Leonard", contacts[2].text)

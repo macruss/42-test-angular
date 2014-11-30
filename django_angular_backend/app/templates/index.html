@@ -9,27 +9,23 @@
     <title>Angular app</title>
 
   </head>
-  <body ng-controller="InfoCtrl as vm">
+  <body>
     <h1>42-test-angular</h1>
-    
-    <h2>My info</h2>
+    <nav>
+      <ul>
+        <li><a href="#/main">Main</a></li>
+        <li><a href="#/contacts">Contacts</a></li>
+      </ul>
+    </nav>
+    <div ng-view></div>
 
-    <table id="my-info">
-      <tbody>
-        <tr ng-repeat="field in vm.myInfo">
-          <td ng-bind="field.field_name"></td>
-          <td ng-bind="field.value"></td>
-        </tr>
-      </tbody>
-    </table>
-    
     <!-- lib -->
     <script type="text/javascript" src="{% static "lib/angular.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "lib/angular-mocks.js" %}"></script>
     <script type="text/javascript" src="{% static "lib/angular-route.min.js" %}"></script>
 
     <!-- app -->
     <script type="text/javascript" src="{% static "app/js/app.js" %}"></script>
+    <script type="text/javascript" src="{% static "app/js/config/route.config.js" %}"></script>
     <script type="text/javascript" src="{% static "app/js/services/contacts.service.js" %}"></script>
     <script type="text/javascript" src="{% static "app/js/controllers/info.controller.js" %}"></script>
     <script type="text/javascript" src="{% static "app/js/controllers/contacts.controller.js" %}"></script>

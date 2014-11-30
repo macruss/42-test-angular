@@ -10,7 +10,6 @@
         var vm = this;
         vm.contacts = [];
 
-
         activate();
 
         function activate() {
