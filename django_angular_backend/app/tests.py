@@ -76,11 +76,11 @@ class ContactsTest(LiveServerTestCase):
         self.assertEqual(len(contacts), 13)
         self.assertIn("Leonard", contacts[2].text)
 
-class EditContactTest(object):
+class EditContactTest(LiveServerTestCase):
     fixtures = ['initial_data.json']
 
     def setUp(self):
-        self.browser = webdriver.PhantomJS()
+        self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
@@ -89,8 +89,7 @@ class EditContactTest(object):
     def test_link_edit_contact(self):
         self.browser.get(self.live_server_url + '/#/contacts')
 
-        self.browser.find_element_by_css_selector('a[ng-href="#/contacts/1"]')
-        contact.click()
+        self.browser.find_element_by_css_selector('a[ng-href="#/contacts/1"]').click()
 
         heading = self.browser.find_element_by_tag_name('h2')
         self.assertEquals(heading.text, 'Edit contact')
@@ -98,21 +97,15 @@ class EditContactTest(object):
     def test_editing_contact(self):
         self.browser.get(self.live_server_url + '/#/contacts/1')
 
-        first_name_field = self.browser.find_element_by_css_selector(
-            'input[ng-model="edit.contact.first_name"]'
-        )
+        first_name_field = self.browser.find_element_by_name('cName')
         first_name_field.clear()
         first_name_field.send_keys("Ruslan")
 
-        last_name_field = self.browser.find_element_by_css_selector(
-            'input[ng-model="edit.contact.last_name"]'
-        )
+        last_name_field = self.browser.find_element_by_name('cSurname')
         last_name_field.clear()
         last_name_field.send_keys("Makarenko")
 
-        email_field = self.browser.find_element_by_css_selector(
-            'input[ng-model="edit.contact.email"]'
-        )
+        email_field = self.browser.find_element_by_name('cEmail')
         email_field.clear()
         email_field.send_keys("ruslan.makarenko@gmail.com")
 
