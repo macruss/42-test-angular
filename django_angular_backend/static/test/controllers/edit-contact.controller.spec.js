@@ -46,7 +46,7 @@ describe('Edit Contact Controller', function() {
         var $controller = $injector.get('$controller');
 
         createController = function() {
-            return $controller('ContactCtrl', {'$routeParams': $routeParams});
+            return $controller('EditContactCtrl', {'$routeParams': $routeParams});
         };
     }));
 
