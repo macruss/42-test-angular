@@ -80,7 +80,7 @@ class EditContactTest(LiveServerTestCase):
     fixtures = ['initial_data.json']
 
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.PhantomJS()
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
