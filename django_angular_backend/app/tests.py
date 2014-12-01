@@ -109,7 +109,11 @@ class EditContactTest(LiveServerTestCase):
         email_field.clear()
         email_field.send_keys("ruslan.makarenko@gmail.com")
 
-        self.browser.find_element_by_name('Submit').click()
+        self.browser.find_element_by_tag_name('button').click()
+        self.browser.get(self.live_server_url + '/#/contacts')
+        contacts = self.browser.find_elements_by_css_selector('tbody tr')
+        self.assertIn("Ruslan", contacts[0].text)
+
 
         contacts = Contact.objects.all()
 
