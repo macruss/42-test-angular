@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.test import LiveServerTestCase
 from selenium import webdriver
-
+from models import Contact
 
 
 class HttpTest(TestCase):
@@ -75,3 +75,44 @@ class ContactsTest(LiveServerTestCase):
 
         self.assertEqual(len(contacts), 13)
         self.assertIn("Leonard", contacts[2].text)
+
+class EditContactTest(LiveServerTestCase):
+    fixtures = ['initial_data.json']
+
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+        self.browser.implicitly_wait(3)
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_link_edit_contact(self):
+        self.browser.get(self.live_server_url + '/#/contacts')
+
+        self.browser.find_element_by_css_selector('a[ng-href="#/contacts/1"]').click()
+
+        heading = self.browser.find_element_by_tag_name('h2')
+        self.assertEquals(heading.text, 'Edit contact')
+
+    def test_editing_contact(self):
+        self.browser.get(self.live_server_url + '/#/contacts/1')
+
+        first_name_field = self.browser.find_element_by_name('cName')
+        first_name_field.clear()
+        first_name_field.send_keys("Ruslan")
+
+        last_name_field = self.browser.find_element_by_name('cSurname')
+        last_name_field.clear()
+        last_name_field.send_keys("Makarenko")
+
+        email_field = self.browser.find_element_by_name('cEmail')
+        email_field.clear()
+        email_field.send_keys("ruslan.makarenko@gmail.com")
+
+        self.browser.find_element_by_name('Submit').click()
+
+        contacts = Contact.objects.all()
+
+        self.assertEqual(contacts[0].first_name, "Ruslan")
+        self.assertEqual(contacts[0].last_name, "Makarenko")
+        self.assertEqual(contacts[0].email, "ruslan.makarenko@gmail.com")
